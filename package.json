@@ -6,7 +6,10 @@
   "scripts": {
     "test": "jest",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "dev": "start-test docs:dev 8080 cy:open"
   },
   "repository": {
     "type": "git",
@@ -23,11 +26,13 @@
     "jest": "^27.5.1"
   },
   "devDependencies": {
+    "cypress": "^9.5.4",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.2",
     "serve": "^13.0.2",
+    "start-server-and-test": "^1.14.0",
     "vuepress": "^1.9.7"
   }
 }
