@@ -1,13 +1,27 @@
-name: deployed
+name: CD
+
 on:
-  status:
+  push:
     branches:
-      - main
+      - "main"
+
 jobs:
-  test-deployed-page:
-    if: github.event.context == 'github/pages' && github.event.state == 'success'
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+
     steps:
-      - run: echo "gh-pages 📑 built successfully ✅"
-      - name: show deployed page
-        run: curl -s https://glebbahmutov.com/triple-tested
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install and build
+        run: npm install && npm run build
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
